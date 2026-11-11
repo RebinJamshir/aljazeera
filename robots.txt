@@ -1,0 +1,8 @@
+# Robots.txt for Afrah Al Jazeera Auto Spare Parts
+# شركة أفراح الجزيرة لقطع غيار السيارات - ينبع
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://afrah-aljazeera.com/sitemap.xml
+

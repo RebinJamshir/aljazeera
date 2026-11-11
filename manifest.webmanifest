@@ -1,0 +1,22 @@
+{
+  "name": "شركة أفراح الجزيرة لقطع غيار السيارات",
+  "short_name": "أفراح الجزيرة",
+  "description": "شركة أفراح الجزيرة لتجارة واستيراد قطع غيار السيارات الأصلية والمضمونة في ينبع - المملكة العربية السعودية",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#102D46",
+  "theme_color": "#102D46",
+  "dir": "rtl",
+  "lang": "ar",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "automotive", "business"]
+}
+
