@@ -71,6 +71,14 @@ const BUSINESS_CONFIG = {
     }
   },
 
+  // Social Media Channels (Optional - Paste your profile URLs when available)
+  socials: {
+    instagram: '', // e.g. 'https://instagram.com/afrah_aljazeera'
+    tiktok: '',    // e.g. 'https://tiktok.com/@afrah_aljazeera'
+    snapchat: '',  // e.g. 'https://snapchat.com/add/afrah_aljazeera'
+    twitter: ''    // e.g. 'https://x.com/afrah_aljazeera'
+  },
+
   // Business Hours Configuration (Asia/Riyadh Timezone)
   // 0: Sunday, 1: Monday, 2: Tuesday, 3: Wednesday, 4: Thursday, 5: Friday, 6: Saturday
   // Supports single or multiple sessions per day (e.g. morning and evening shifts)
@@ -151,4 +159,3 @@ Please advise on availability and pricing. Thank you!`
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = BUSINESS_CONFIG;
 }
-
