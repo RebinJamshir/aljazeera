@@ -73,7 +73,7 @@ if (schemaMatch) {
     schemaData = JSON.parse(schemaMatch[1]);
     assert(schemaData['@type'] === 'AutoPartsStore', 'Schema type is AutoPartsStore');
     assert(schemaData.name === 'شركة أفراح الجزيرة لقطع غيار السيارات', 'Schema name matches Arabic business name');
-    assert(schemaData.telephone === '+96656101712', 'Schema telephone matches verified mobile');
+    assert(schemaData.telephone === '+966556516712', 'Schema telephone matches verified mobile');
     assert(schemaData.email === 'jazeera@gmail.com', 'Schema email matches verified email');
     assert(schemaData.address && schemaData.address.addressLocality.includes('Yanbu'), 'Schema locality is Yanbu');
     assert(schemaData.geo && schemaData.geo.latitude === 24.0892, 'Schema geo latitude is 24.0892');
@@ -88,8 +88,8 @@ console.log('\nTEST SUITE 4: Central Configuration (js/config.js)');
 const BUSINESS_CONFIG = require(path.join(ROOT, 'js/config.js'));
 
 assert(BUSINESS_CONFIG.productionUrl === 'https://afrah-aljazeera.com', 'Config contains productionUrl');
-assert(BUSINESS_CONFIG.contacts.mobile.raw === '+96656101712', 'Config contains mobile +96656101712');
-assert(BUSINESS_CONFIG.contacts.mobile.clean === '96656101712', 'Config contains clean mobile 96656101712');
+assert(BUSINESS_CONFIG.contacts.mobile.raw === '+966556516712', 'Config contains mobile +966556516712');
+assert(BUSINESS_CONFIG.contacts.mobile.clean === '966556516712', 'Config contains clean mobile 966556516712');
 assert(BUSINESS_CONFIG.contacts.landline.raw === '0143900266', 'Config contains landline 0143900266');
 assert(BUSINESS_CONFIG.contacts.email === 'jazeera@gmail.com', 'Config contains email jazeera@gmail.com');
 assert(BUSINESS_CONFIG.hours.timezone === 'Asia/Riyadh', 'Config specifies Asia/Riyadh timezone');
@@ -116,7 +116,7 @@ const vcardSample = [
   'FN;CHARSET=UTF-8:شركة أفراح الجزيرة لقطع غيار السيارات',
   'ORG;CHARSET=UTF-8:Afrah Al Jazeera Auto Spare Parts',
   'TITLE;CHARSET=UTF-8:قطع غيار سيارات - Auto Spare Parts',
-  'TEL;TYPE=CELL,VOICE,PREF:+96656101712',
+  'TEL;TYPE=CELL,VOICE,PREF:+966556516712',
   'TEL;TYPE=WORK,VOICE:+966143900266',
   'EMAIL;TYPE=INTERNET,WORK:jazeera@gmail.com',
   'ADR;TYPE=WORK;CHARSET=UTF-8:;;Yanbu Manazel Hotel;Yanbu;;46424;Saudi Arabia',
@@ -133,7 +133,7 @@ assert(contactSvg.includes('#B5121B'), 'Contact vCard SVG supports custom brand 
 
 // C. WhatsApp Direct Chat QR
 const waSampleText = 'السلام عليكم ورحمة الله وبركاته، أستفسر عن قطع غيار سيارات.';
-const waUrl = `https://wa.me/96656101712?text=${encodeURIComponent(waSampleText)}`;
+const waUrl = `https://wa.me/966556516712?text=${encodeURIComponent(waSampleText)}`;
 const waQr = qrcode(0, 'M');
 waQr.addData(waUrl);
 waQr.make();
@@ -161,7 +161,7 @@ assert(printCss.includes('A4 portrait'), 'Print CSS configures A4 portrait page 
 
 // 8. Contact Consistency Verification
 console.log('\nTEST SUITE 8: Contact Consistency Across System');
-const phoneInHtml = indexHtml.includes('056 101 712') || indexHtml.includes('056101712');
+const phoneInHtml = indexHtml.includes('055 651 6712') || indexHtml.includes('055 651 6712');
 const landlineInHtml = indexHtml.includes('014 390 0266') || indexHtml.includes('0143900266');
 const emailInHtml = indexHtml.includes('jazeera@gmail.com');
 const locationInHtml = indexHtml.includes('منازل ينبع') || indexHtml.includes('Yanbu Manazel');

@@ -34,12 +34,12 @@ const BUSINESS_CONFIG = {
 
   // Contact Information (Strictly verified from business card)
   contacts: {
-    // Mobile & WhatsApp (International format without '+' for WhatsApp API: 96656101712)
+    // Mobile & WhatsApp (International format without '+' for WhatsApp API: 966556516712)
     mobile: {
-      raw: '+96656101712',
-      display: '056 101 712',
-      international: '+966 56 101 712',
-      clean: '96656101712'
+      raw: '+966556516712',
+      display: '055 651 6712',
+      international: '+966 55 651 6712',
+      clean: '966556516712'
     },
     // Showroom Landline
     landline: {

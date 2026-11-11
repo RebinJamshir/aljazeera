@@ -33,11 +33,11 @@ const TRANSLATIONS = {
 
     // Quick Actions
     whatsappCta: 'راسلنا مباشرة عبر واتساب',
-    whatsappSub: 'خدمة العملاء والاستفسار الفوري: 056101712',
+    whatsappSub: 'خدمة العملاء والاستفسار الفوري: 0556516712',
     inquiryFormBtn: 'طلب تسعيرة قطعة غيار عبر واتساب',
     inquiryFormSub: 'تحديد الماركة، الموديل، سنة الصنع والقطعة المطلوبة',
     callMobile: 'اتصال مباشر (جوال)',
-    callMobileSub: '056 101 712 • جوال المبيعات',
+    callMobileSub: '055 651 6712 • جوال المبيعات',
     callLandline: 'الهاتف الثابت (المعرض)',
     callLandlineSub: '014 390 0266 • هاتف المعرض الرئيسي',
     emailBtn: 'البريد الإلكتروني الرسمي',
@@ -110,11 +110,11 @@ const TRANSLATIONS = {
 
     // Quick Actions
     whatsappCta: 'Chat Directly on WhatsApp',
-    whatsappSub: 'Instant Support & Part Inquiries: +966 56 101 712',
+    whatsappSub: 'Instant Support & Part Inquiries: +966 55 651 6712',
     inquiryFormBtn: 'Request Spare Part Quote on WhatsApp',
     inquiryFormSub: 'Specify Vehicle Brand, Model, Year & Required Component',
     callMobile: 'Direct Mobile Call',
-    callMobileSub: '056 101 712 • Sales & Parts Specialist',
+    callMobileSub: '055 651 6712 • Sales & Parts Specialist',
     callLandline: 'Showroom Landline',
     callLandlineSub: '014 390 0266 • Yanbu Main Showroom',
     emailBtn: 'Official Showroom Email',
