@@ -2,7 +2,7 @@
 <html dir="rtl" lang="ar">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover"/>
   
   <!-- Technical SEO: Primary Metadata -->
   <title>شركة أفراح الجزيرة لقطع غيار السيارات | ينبع | Afrah Al Jazeera Auto Spare Parts</title>
@@ -120,11 +120,19 @@
   <!-- Dedicated Print Stylesheet -->
   <link rel="stylesheet" href="css/print.css" media="print"/>
 
-  <!-- Tailwind CSS v3 with Plugins -->
+  <!-- Tailwind CSS v3 with Plugins & Extended Mobile Breakpoints -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script>
     tailwind.config = {
       theme: {
+        screens: {
+          'xs': '360px',
+          'sm': '640px',
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1280px',
+          '2xl': '1536px',
+        },
         extend: {
           colors: {
             brand: {
@@ -151,88 +159,85 @@
     }
   </script>
 
-  <!-- Custom Styles -->
+  <!-- Mobile-First Responsive CSS Core Reset -->
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
     body {
-      font-family: 'Cairo', 'Inter', sans-serif;
+      font-family: 'Cairo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #ECEFF3;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
+      margin: 0;
+      padding: 0;
     }
     .font-latin {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
-    .red-line-divider {
-      position: relative;
-    }
-    .red-line-divider::before,
-    .red-line-divider::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      width: 45px;
-      height: 2.5px;
-      background-color: #B5121B;
-      border-radius: 9999px;
-    }
-    .red-line-divider::before {
-      right: -55px;
-    }
-    .red-line-divider::after {
-      left: -55px;
-    }
-    [dir="ltr"] .red-line-divider::before {
-      right: auto;
-      left: -55px;
-    }
-    [dir="ltr"] .red-line-divider::after {
-      left: auto;
-      right: -55px;
+    /* Universal media constraint preventing horizontal blowouts */
+    img, svg, iframe, canvas {
+      max-width: 100%;
+      height: auto;
     }
     /* QR canvas container */
     .qr-canvas-wrapper canvas {
-      max-width: 100%;
-      height: auto;
+      max-width: 100% !important;
+      height: auto !important;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
+    /* Touch optimization */
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 flex flex-col justify-between selection:bg-[#B5121B] selection:text-white antialiased">
+<body class="min-h-screen text-slate-800 flex flex-col justify-between selection:bg-[#B5121B] selection:text-white antialiased overflow-x-hidden">
 
   <!-- BEGIN: Toast Notifications Container -->
-  <div id="toastContainer" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 items-center pointer-events-none w-full max-w-sm px-4"></div>
+  <div id="toastContainer" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 items-center pointer-events-none w-full max-w-xs sm:max-w-sm px-3"></div>
 
-  <!-- BEGIN: MainContainer -->
-  <div class="main-card-container w-full max-w-xl mx-auto my-0 sm:my-8 bg-white min-h-screen sm:min-h-0 sm:rounded-3xl shadow-2xl relative overflow-hidden flex flex-col border border-slate-200/80">
+  <!-- BEGIN: MainContainer (Mobile-First, Centered, Card presentation on desktop) -->
+  <div class="main-card-container w-full max-w-xl mx-auto my-0 sm:my-6 md:my-8 bg-white min-h-screen sm:min-h-0 sm:rounded-3xl shadow-2xl relative overflow-hidden flex flex-col border-0 sm:border border-slate-200/80">
 
-    <!-- BEGIN: TopBar -->
-    <header class="w-full px-4 sm:px-5 py-3 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-600 no-print">
+    <!-- BEGIN: TopBar (Flexible, wraps cleanly, prevents truncation or off-screen overflow) -->
+    <header class="w-full px-3.5 sm:px-5 py-2.5 sm:py-3 bg-slate-50 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-600 no-print">
       <!-- Status Badge (Clickable to view full hours schedule) -->
-      <button onclick="openHoursModal()" id="statusBadgeContainer" class="flex items-center gap-1.5 hover:bg-slate-200/60 px-2 py-1 rounded-lg transition" title="عرض أوقات العمل الرسمية">
-        <span class="relative flex h-2.5 w-2.5">
+      <button onclick="openHoursModal()" id="statusBadgeContainer" class="flex items-center gap-1.5 hover:bg-slate-200/60 px-2 py-1 rounded-lg transition min-w-0 max-w-[62%] sm:max-w-none text-start" title="عرض أوقات العمل الرسمية">
+        <span class="relative flex h-2.5 w-2.5 flex-shrink-0">
           <span id="statusPing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span id="statusDot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
         </span>
-        <span id="statusText" class="text-emerald-700 font-bold" data-i18n="openNow">مفتوح الآن</span>
-        <span id="statusTime" class="text-slate-400 font-medium">| 8:00 ص – 10:00 م</span>
-        <i class="fa-solid fa-chevron-down text-[9px] text-slate-400 ms-0.5"></i>
+        <span id="statusText" class="text-emerald-700 font-bold whitespace-nowrap text-xs" data-i18n="openNow">مفتوح الآن</span>
+        <span id="statusTime" class="text-slate-400 font-medium truncate text-[11px] hidden xs:inline">| 8:00 ص – 10:00 م</span>
+        <i class="fa-solid fa-chevron-down text-[9px] text-slate-400 ms-0.5 flex-shrink-0"></i>
       </button>
 
       <!-- Language Toggle & Quick QR & Location -->
-      <div class="flex items-center gap-1.5 sm:gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0 ms-auto">
         <!-- Bilingual Language Switcher -->
-        <button onclick="toggleLanguage()" class="flex items-center gap-1 text-slate-700 font-bold bg-white hover:bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-full text-[11px] shadow-xs transition" title="تبديل اللغة / Switch Language">
-          <i class="fa-solid fa-globe text-brand-sky"></i>
+        <button onclick="toggleLanguage()" class="flex items-center gap-1 text-slate-700 font-bold bg-white hover:bg-slate-100 border border-slate-200 px-2 sm:px-2.5 py-1 rounded-full text-[11px] shadow-xs transition" title="تبديل اللغة / Switch Language">
+          <i class="fa-solid fa-globe text-brand-sky text-xs"></i>
           <span id="langToggleText" class="font-latin">English</span>
         </button>
 
         <!-- Quick QR Modal Trigger -->
-        <button onclick="openQrModal()" class="flex items-center gap-1 text-brand-navy font-bold bg-white hover:bg-brand-skyLight border border-slate-200 px-2.5 py-1 rounded-full text-[11px] shadow-xs transition" title="مركز رموز QR والمشاركة">
-          <i class="fa-solid fa-qrcode text-brand-red"></i>
+        <button onclick="openQrModal()" class="flex items-center gap-1 text-brand-navy font-bold bg-white hover:bg-brand-skyLight border border-slate-200 px-2 sm:px-2.5 py-1 rounded-full text-[11px] shadow-xs transition" title="مركز رموز QR والمشاركة">
+          <i class="fa-solid fa-qrcode text-brand-red text-xs"></i>
           <span>QR</span>
         </button>
 
-        <!-- Location Badge -->
-        <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" class="hidden xs:flex items-center gap-1 text-brand-navy font-medium bg-brand-skyLight/70 hover:bg-brand-skyLight px-2.5 py-1 rounded-full text-[11px] transition">
+        <!-- Location Badge (Visible on tablet/desktop to avoid crowded mobile top bar) -->
+        <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-1 text-brand-navy font-medium bg-brand-skyLight/70 hover:bg-brand-skyLight px-2.5 py-1 rounded-full text-[11px] transition">
           <i class="fa-solid fa-location-dot text-brand-red"></i>
           <span data-i18n="yanbuLocation">ينبع • Yanbu</span>
         </a>
@@ -253,12 +258,13 @@
     <!-- END: PrintHeader -->
 
     <!-- BEGIN: HeaderAndLogo -->
-    <section class="pt-6 pb-3 px-5 sm:px-6 text-center relative flex flex-col items-center" data-purpose="brand-presentation">
-      <!-- Official High-Resolution Brand Logo -->
-      <div class="w-64 sm:w-72 max-w-[90%] mb-1 relative flex items-center justify-center select-none" data-purpose="brand-logo">
+    <section class="pt-5 sm:pt-6 pb-3 px-4 sm:px-6 text-center relative flex flex-col items-center" data-purpose="brand-presentation">
+      <!-- Official High-Resolution Brand Logo (Responsive with fixed aspect ratio to eliminate layout shift) -->
+      <div class="w-full max-w-[240px] xs:max-w-[260px] sm:max-w-[280px] mx-auto mb-2 relative flex items-center justify-center select-none" data-purpose="brand-logo">
         <img src="assets/logo.jpg" 
              alt="شركة أفراح الجزيرة لقطع غيار السيارات - AFRAH AL JAZEERA AUTO SPARE PARTS" 
-             class="w-full h-auto object-contain drop-shadow-xs rounded-2xl" 
+             class="w-full h-auto max-w-full object-contain drop-shadow-xs rounded-xl" 
+             style="aspect-ratio: 653 / 640;"
              width="653" 
              height="640" 
              loading="eager" />
@@ -272,230 +278,239 @@
         AFRAH AL JAZEERA AUTO SPARE PARTS
       </h2>
 
-      <!-- Business Description Tagline -->
-      <p class="text-xs text-slate-500 font-medium max-w-sm mx-auto leading-relaxed mt-2" data-i18n="companyDesc">
-        لتجارة واستيراد جميع أنواع قطع غيار السيارات الأصلية والمضمونة في ينبع
-      </p>
-      <div class="text-[11px] text-slate-400 font-latin mt-0.5" data-i18n="subFeatures">
-        Engine • Brakes • Filters & Oils • Batteries & Starters • Suspension
+      <!-- Responsive Accent Line Divider (Never overflows on narrow viewports) -->
+      <div class="inline-flex items-center justify-center gap-2 max-w-full my-1.5 px-3">
+        <span class="w-6 sm:w-10 h-[2px] bg-brand-red rounded-full flex-shrink-0"></span>
+        <span class="text-brand-navy font-bold text-[11px] sm:text-xs tracking-wider uppercase font-latin text-center truncate" data-i18n="badgeText">
+          AUTO SPARE PARTS • لقطع غيار السيارات
+        </span>
+        <span class="w-6 sm:w-10 h-[2px] bg-brand-red rounded-full flex-shrink-0"></span>
       </div>
 
-      <!-- Exact Location Pin as in Business Card -->
-      <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200/80 transition-colors border border-slate-200/80 text-brand-navy px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-xs">
-        <i class="fa-solid fa-location-dot text-brand-red text-base"></i>
-        <span data-i18n="yanbuAddressPill">فندق منازل ينبع | طريق الملك عبدالعزيز</span>
+      <!-- Business Description Tagline -->
+      <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-sm mx-auto leading-relaxed mt-1 px-2" data-i18n="companyDesc">
+        لتجارة واستيراد جميع أنواع قطع غيار السيارات الأصلية والمضمونة في ينبع
+      </p>
+      <div class="text-[10px] sm:text-xs text-slate-400 font-latin mt-0.5 px-2" data-i18n="subFeatures">
+        Engine • Brakes • Filters &amp; Oils • Batteries &amp; Starters • Suspension
+      </div>
+
+      <!-- Exact Location Pin as in Business Card (Responsive truncated pill) -->
+      <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center justify-center gap-1.5 max-w-full bg-slate-100 hover:bg-slate-200/80 transition-colors border border-slate-200/80 text-brand-navy px-3 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold shadow-xs">
+        <i class="fa-solid fa-location-dot text-brand-red text-sm flex-shrink-0"></i>
+        <span class="truncate" data-i18n="yanbuAddressPill">فندق منازل ينبع | طريق الملك عبدالعزيز</span>
       </a>
     </section>
     <!-- END: HeaderAndLogo -->
 
-    <!-- BEGIN: QuickContactActionCards -->
-    <section class="px-5 sm:px-8 py-2 space-y-3 no-print" data-purpose="primary-links">
+    <!-- BEGIN: QuickContactActionCards (Mobile-First, flex child safety, zero horizontal overflow) -->
+    <section class="px-3.5 sm:px-8 py-2 space-y-2.5 sm:space-y-3 no-print" data-purpose="primary-links">
       
       <!-- 1. WhatsApp Primary Direct Action -->
       <a href="https://wa.me/966556516712?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D9%88%D8%B1%D8%AD%D9%85%D8%A9%20%D8%A7%D9%84%D9%84%D9%87%D8%8C%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D9%82%D8%B7%D8%B9%20%D8%BA%D9%8A%D8%A7%D8%B1" 
          target="_blank" rel="noopener noreferrer" 
-         class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg shadow-emerald-500/20 transform transition-all duration-200 active:scale-[0.98]">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-2xl text-white shadow-inner">
+         class="group flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg shadow-emerald-500/20 transform transition-all duration-200 active:scale-[0.98]">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-xl sm:text-2xl text-white shadow-inner flex-shrink-0">
             <i class="fa-brands fa-whatsapp"></i>
           </div>
-          <div class="text-start">
-            <div class="font-bold text-base leading-tight" data-i18n="whatsappCta">راسلنا مباشرة عبر واتساب</div>
-            <div class="text-xs text-emerald-100 font-latin tracking-wide mt-0.5" data-i18n="whatsappSub">Chat on WhatsApp: +966 55 651 6712</div>
+          <div class="text-start min-w-0 flex-1">
+            <div class="font-bold text-sm sm:text-base leading-tight truncate" data-i18n="whatsappCta">راسلنا مباشرة عبر واتساب</div>
+            <div class="text-[11px] sm:text-xs text-emerald-100 font-latin tracking-wide mt-0.5 truncate" data-i18n="whatsappSub">Chat on WhatsApp: +966 55 651 6712</div>
           </div>
         </div>
-        <div class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white group-hover:-translate-x-1 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1 transition-transform">
-          <i class="fa-solid fa-arrow-left rtl:inline ltr:hidden"></i>
-          <i class="fa-solid fa-arrow-right ltr:inline rtl:hidden"></i>
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/15 flex items-center justify-center text-white flex-shrink-0 ms-2 group-hover:-translate-x-1 rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1 transition-transform">
+          <i class="fa-solid fa-arrow-left rtl:inline ltr:hidden text-xs sm:text-sm"></i>
+          <i class="fa-solid fa-arrow-right ltr:inline rtl:hidden text-xs sm:text-sm"></i>
         </div>
       </a>
 
       <!-- 2. Interactive WhatsApp Spare Parts Inquiry Form Trigger -->
       <button onclick="openInquiryModal()" 
-              class="w-full group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-brand-red to-brand-redDark text-white shadow-md shadow-brand-red/20 transition-all duration-200 active:scale-[0.98] text-start">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-xl text-white shadow-inner">
+              class="w-full group flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-brand-red to-brand-redDark text-white shadow-md shadow-brand-red/20 transition-all duration-200 active:scale-[0.98] text-start">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/20 flex items-center justify-center text-lg sm:text-xl text-white shadow-inner flex-shrink-0">
             <i class="fa-solid fa-clipboard-list"></i>
           </div>
-          <div>
-            <div class="font-bold text-base leading-tight" data-i18n="inquiryFormBtn">طلب تسعيرة قطعة غيار عبر واتساب</div>
-            <div class="text-xs text-rose-100 mt-0.5" data-i18n="inquiryFormSub">تحديد الماركة، الموديل، سنة الصنع والقطعة المطلوبة</div>
+          <div class="min-w-0 flex-1">
+            <div class="font-bold text-sm sm:text-base leading-tight truncate" data-i18n="inquiryFormBtn">طلب تسعيرة قطعة غيار عبر واتساب</div>
+            <div class="text-[11px] sm:text-xs text-rose-100 mt-0.5 truncate" data-i18n="inquiryFormSub">تحديد الماركة، الموديل، سنة الصنع والقطعة المطلوبة</div>
           </div>
         </div>
-        <span class="text-xs font-bold px-2.5 py-1 bg-white/20 rounded-lg text-white font-latin">
+        <span class="text-[10px] sm:text-xs font-bold px-2 sm:px-2.5 py-1 bg-white/20 rounded-lg text-white font-latin flex-shrink-0 ms-2">
           INQUIRE
         </span>
       </button>
 
       <!-- 3. Direct Phone Call (Mobile) -->
       <a href="tel:+966556516712" 
-         class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-brand-navy hover:bg-brand-navyLight text-white shadow-md shadow-brand-navy/15 transition-all duration-200 active:scale-[0.98]">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl text-brand-sky shadow-inner">
+         class="group flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-brand-navy hover:bg-brand-navyLight text-white shadow-md shadow-brand-navy/15 transition-all duration-200 active:scale-[0.98]">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center text-lg sm:text-xl text-brand-sky shadow-inner flex-shrink-0">
             <i class="fa-solid fa-mobile-screen-button"></i>
           </div>
-          <div class="text-start">
-            <div class="font-bold text-base leading-tight" data-i18n="callMobile">اتصال مباشر (جوال)</div>
-            <div class="text-xs text-slate-300 font-latin tracking-wider font-semibold mt-0.5" data-i18n="callMobileSub">055 651 6712 • 055 651 6712</div>
+          <div class="text-start min-w-0 flex-1">
+            <div class="font-bold text-sm sm:text-base leading-tight truncate" data-i18n="callMobile">اتصال مباشر (جوال)</div>
+            <div class="text-[11px] sm:text-xs text-slate-300 font-latin tracking-wider font-semibold mt-0.5 truncate" data-i18n="callMobileSub">055 651 6712 • 055 651 6712</div>
           </div>
         </div>
-        <span class="text-xs font-semibold px-2.5 py-1 bg-white/10 rounded-lg text-slate-200 group-hover:bg-brand-red group-hover:text-white transition-colors font-latin">
+        <span class="text-[10px] sm:text-xs font-semibold px-2 sm:px-2.5 py-1 bg-white/10 rounded-lg text-slate-200 group-hover:bg-brand-red group-hover:text-white transition-colors font-latin flex-shrink-0 ms-2">
           CALL NOW
         </span>
       </a>
 
       <!-- 4. Direct Phone Call (Showroom Landline) -->
       <a href="tel:0143900266" 
-         class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-slate-50 text-brand-navy border-2 border-slate-200/90 shadow-sm transition-all duration-200 active:scale-[0.98]">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-xl bg-slate-100 group-hover:bg-brand-skyLight flex items-center justify-center text-xl text-brand-navy transition-colors">
+         class="group flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-white hover:bg-slate-50 text-brand-navy border-2 border-slate-200/90 shadow-sm transition-all duration-200 active:scale-[0.98]">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-100 group-hover:bg-brand-skyLight flex items-center justify-center text-lg sm:text-xl text-brand-navy transition-colors flex-shrink-0">
             <i class="fa-solid fa-phone"></i>
           </div>
-          <div class="text-start">
-            <div class="font-bold text-base text-slate-900 leading-tight" data-i18n="callLandline">الهاتف الثابت (المعرض)</div>
-            <div class="text-xs text-slate-500 font-latin font-bold mt-0.5" data-i18n="callLandlineSub">014 390 0266 • 0143900266</div>
+          <div class="text-start min-w-0 flex-1">
+            <div class="font-bold text-sm sm:text-base text-slate-900 leading-tight truncate" data-i18n="callLandline">الهاتف الثابت (المعرض)</div>
+            <div class="text-[11px] sm:text-xs text-slate-500 font-latin font-bold mt-0.5 truncate" data-i18n="callLandlineSub">014 390 0266 • 0143900266</div>
           </div>
         </div>
-        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 group-hover:text-brand-navy transition-transform">
-          <i class="fa-solid fa-arrow-left rtl:inline ltr:hidden"></i>
-          <i class="fa-solid fa-arrow-right ltr:inline rtl:hidden"></i>
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 group-hover:text-brand-navy flex-shrink-0 ms-2 transition-transform">
+          <i class="fa-solid fa-arrow-left rtl:inline ltr:hidden text-xs sm:text-sm"></i>
+          <i class="fa-solid fa-arrow-right ltr:inline rtl:hidden text-xs sm:text-sm"></i>
         </div>
       </a>
 
       <!-- 5. Showroom Email -->
       <a href="mailto:jazeera@gmail.com?subject=Spare%20Parts%20Inquiry%20-%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D9%82%D8%B7%D8%B9%20%D8%BA%D9%8A%D8%A7%D8%B1" 
-         class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200/90 shadow-sm transition-all duration-200 active:scale-[0.98]">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-xl bg-brand-red/10 flex items-center justify-center text-xl text-brand-red">
+         class="group flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200/90 shadow-sm transition-all duration-200 active:scale-[0.98]">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-brand-red/10 flex items-center justify-center text-lg sm:text-xl text-brand-red flex-shrink-0">
             <i class="fa-solid fa-envelope"></i>
           </div>
-          <div class="text-start">
-            <div class="font-bold text-base text-slate-900 leading-tight" data-i18n="emailBtn">البريد الإلكتروني الرسمي</div>
-            <div class="text-xs text-slate-500 font-latin font-medium mt-0.5">jazeera@gmail.com</div>
+          <div class="text-start min-w-0 flex-1">
+            <div class="font-bold text-sm sm:text-base text-slate-900 leading-tight truncate" data-i18n="emailBtn">البريد الإلكتروني الرسمي</div>
+            <div class="text-[11px] sm:text-xs text-slate-500 font-latin font-medium mt-0.5 truncate">jazeera@gmail.com</div>
           </div>
         </div>
-        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded text-slate-600 font-latin">
+        <span class="text-[10px] sm:text-xs font-semibold px-2 sm:px-2.5 py-1 bg-slate-100 rounded text-slate-600 font-latin flex-shrink-0 ms-2">
           EMAIL
         </span>
       </a>
 
       <!-- 6. Google Maps Directions -->
       <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" 
-         class="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900 to-brand-navy text-white shadow-md transition-all duration-200 active:scale-[0.98]">
-        <div class="flex items-center gap-3.5">
-          <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl text-amber-400">
+         class="group flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900 to-brand-navy text-white shadow-md transition-all duration-200 active:scale-[0.98]">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center text-lg sm:text-xl text-amber-400 flex-shrink-0">
             <i class="fa-solid fa-map-location-dot"></i>
           </div>
-          <div class="text-start">
-            <div class="font-bold text-base leading-tight" data-i18n="directionsBtn">موقع المعرض على الخريطة</div>
-            <div class="text-xs text-slate-300 mt-0.5" data-i18n="directionsSub">ينبع - بجوار فندق منازل ينبع</div>
+          <div class="text-start min-w-0 flex-1">
+            <div class="font-bold text-sm sm:text-base leading-tight truncate" data-i18n="directionsBtn">موقع المعرض على الخريطة</div>
+            <div class="text-[11px] sm:text-xs text-slate-300 mt-0.5 truncate" data-i18n="directionsSub">ينبع - بجوار فندق منازل ينبع</div>
           </div>
         </div>
-        <div class="flex items-center gap-1 text-xs font-bold text-brand-sky font-latin">
+        <div class="flex items-center gap-1 text-[11px] sm:text-xs font-bold text-brand-sky font-latin flex-shrink-0 ms-2">
           <span>DIRECTIONS</span>
-          <i class="fa-solid fa-location-arrow text-sm"></i>
+          <i class="fa-solid fa-location-arrow text-xs sm:text-sm"></i>
         </div>
       </a>
     </section>
     <!-- END: QuickContactActionCards -->
 
     <!-- BEGIN: AutomotiveCategories -->
-    <section class="px-5 sm:px-8 py-3.5 no-print" data-purpose="services-showcase">
-      <div class="flex items-center justify-between mb-2.5">
-        <h3 class="text-sm font-bold text-brand-navy flex items-center gap-2">
+    <section class="px-3.5 sm:px-8 py-3 no-print" data-purpose="services-showcase">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-xs sm:text-sm font-bold text-brand-navy flex items-center gap-1.5 sm:gap-2">
           <i class="fa-solid fa-gears text-brand-red"></i>
           <span data-i18n="categoriesTitle">الأقسام المتوفرة لقطع الغيار</span>
         </h3>
-        <span class="text-[11px] text-slate-400 font-latin">Genuine &amp; OEM Parts</span>
+        <span class="text-[10px] sm:text-[11px] text-slate-400 font-latin">Genuine &amp; OEM Parts</span>
       </div>
 
-      <div class="grid grid-cols-2 gap-2.5 text-start">
+      <div class="grid grid-cols-2 gap-2 sm:gap-2.5 text-start">
         <!-- Item 1: Electrical & Batteries -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-brand-sky/60 transition-colors">
-          <div class="w-7 h-7 rounded-lg bg-brand-navy/10 text-brand-navy flex items-center justify-center text-xs mb-2">
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 sm:p-3 hover:border-brand-sky/60 transition-colors min-w-0">
+          <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-brand-navy/10 text-brand-navy flex items-center justify-center text-[11px] sm:text-xs mb-1.5 sm:mb-2 flex-shrink-0">
             <i class="fa-solid fa-car-battery"></i>
           </div>
-          <div class="font-bold text-xs text-slate-800" data-i18n="catBatteries">كهرباء السيارات والبطاريات</div>
-          <div class="text-[10px] text-slate-500 font-latin" data-i18n="catBatteriesSub">Starters &amp; Electronics</div>
+          <div class="font-bold text-[11px] sm:text-xs text-slate-800 leading-snug truncate" data-i18n="catBatteries">كهرباء السيارات والبطاريات</div>
+          <div class="text-[9px] sm:text-[10px] text-slate-500 font-latin truncate mt-0.5" data-i18n="catBatteriesSub">Starters &amp; Electronics</div>
         </div>
 
         <!-- Item 2: Brakes & Rotors -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-brand-sky/60 transition-colors">
-          <div class="w-7 h-7 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center text-xs mb-2">
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 sm:p-3 hover:border-brand-sky/60 transition-colors min-w-0">
+          <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center text-[11px] sm:text-xs mb-1.5 sm:mb-2 flex-shrink-0">
             <i class="fa-solid fa-compact-disc"></i>
           </div>
-          <div class="font-bold text-xs text-slate-800" data-i18n="catBrakes">الفرامل والهوبات</div>
-          <div class="text-[10px] text-slate-500 font-latin" data-i18n="catBrakesSub">Brake Pads &amp; Rotors</div>
+          <div class="font-bold text-[11px] sm:text-xs text-slate-800 leading-snug truncate" data-i18n="catBrakes">الفرامل والهوبات</div>
+          <div class="text-[9px] sm:text-[10px] text-slate-500 font-latin truncate mt-0.5" data-i18n="catBrakesSub">Brake Pads &amp; Rotors</div>
         </div>
 
         <!-- Item 3: Oils & Filters -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-brand-sky/60 transition-colors">
-          <div class="w-7 h-7 rounded-lg bg-brand-navy/10 text-brand-navy flex items-center justify-center text-xs mb-2">
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 sm:p-3 hover:border-brand-sky/60 transition-colors min-w-0">
+          <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-brand-navy/10 text-brand-navy flex items-center justify-center text-[11px] sm:text-xs mb-1.5 sm:mb-2 flex-shrink-0">
             <i class="fa-solid fa-oil-can"></i>
           </div>
-          <div class="font-bold text-xs text-slate-800" data-i18n="catFilters">الفلاتر والزيوت</div>
-          <div class="text-[10px] text-slate-500 font-latin" data-i18n="catFiltersSub">Oils &amp; Filter Systems</div>
+          <div class="font-bold text-[11px] sm:text-xs text-slate-800 leading-snug truncate" data-i18n="catFilters">الفلاتر والزيوت</div>
+          <div class="text-[9px] sm:text-[10px] text-slate-500 font-latin truncate mt-0.5" data-i18n="catFiltersSub">Oils &amp; Filter Systems</div>
         </div>
 
         <!-- Item 4: Engines & Suspension -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:border-brand-sky/60 transition-colors">
-          <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-xs mb-2">
+        <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 sm:p-3 hover:border-brand-sky/60 transition-colors min-w-0">
+          <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-[11px] sm:text-xs mb-1.5 sm:mb-2 flex-shrink-0">
             <i class="fa-solid fa-wrench"></i>
           </div>
-          <div class="font-bold text-xs text-slate-800" data-i18n="catSuspension">المحركات وأنظمة التعليق</div>
-          <div class="text-[10px] text-slate-500 font-latin" data-i18n="catSuspensionSub">Suspension &amp; Engine</div>
+          <div class="font-bold text-[11px] sm:text-xs text-slate-800 leading-snug truncate" data-i18n="catSuspension">المحركات وأنظمة التعليق</div>
+          <div class="text-[9px] sm:text-[10px] text-slate-500 font-latin truncate mt-0.5" data-i18n="catSuspensionSub">Suspension &amp; Engine</div>
         </div>
       </div>
     </section>
     <!-- END: AutomotiveCategories -->
 
     <!-- BEGIN: QuickActionToolbar -->
-    <section class="px-5 sm:px-8 py-2 no-print" data-purpose="card-utilities">
-      <div class="grid grid-cols-2 gap-2.5">
+    <section class="px-3.5 sm:px-8 py-2 no-print" data-purpose="card-utilities">
+      <div class="grid grid-cols-2 gap-2 sm:gap-2.5">
         <!-- Direct vCard Download Button -->
         <button onclick="downloadVCardFile()" 
-                class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 transition active:scale-95 group">
-          <i class="fa-solid fa-address-card text-brand-navy group-hover:text-brand-red text-sm transition-colors"></i>
-          <span data-i18n="saveContactBtn">حفظ جهة الاتصال</span>
+                class="flex items-center justify-center gap-1.5 py-2.5 sm:py-3 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-[11px] sm:text-xs text-slate-700 transition active:scale-95 group min-w-0">
+          <i class="fa-solid fa-address-card text-brand-navy group-hover:text-brand-red text-xs sm:text-sm transition-colors flex-shrink-0"></i>
+          <span class="truncate" data-i18n="saveContactBtn">حفظ جهة الاتصال</span>
         </button>
 
         <!-- QR Hub & Share Modal Trigger -->
         <button onclick="openQrModal()" 
-                class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 transition active:scale-95 group">
-          <i class="fa-solid fa-qrcode text-brand-red text-sm group-hover:scale-110 transition-transform"></i>
-          <span data-i18n="qrHubBtn">مركز رموز QR والمشاركة</span>
+                class="flex items-center justify-center gap-1.5 py-2.5 sm:py-3 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-[11px] sm:text-xs text-slate-700 transition active:scale-95 group min-w-0">
+          <i class="fa-solid fa-qrcode text-brand-red text-xs sm:text-sm group-hover:scale-110 transition-transform flex-shrink-0"></i>
+          <span class="truncate" data-i18n="qrHubBtn">مركز رموز QR والمشاركة</span>
         </button>
       </div>
 
       <!-- Print QR Poster / Sheet Button -->
-      <div class="mt-2.5">
+      <div class="mt-2 sm:mt-2.5">
         <button onclick="triggerPrintSheet()" 
-                class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-200 hover:bg-slate-100 font-semibold text-xs text-slate-600 transition active:scale-98">
-          <i class="fa-solid fa-print text-brand-navy"></i>
-          <span data-i18n="printSheetBtn">طباعة لوحة الرموز المعتمدة (A4 Poster)</span>
+                class="w-full flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border border-slate-200 hover:bg-slate-100 font-semibold text-[11px] sm:text-xs text-slate-600 transition active:scale-98">
+          <i class="fa-solid fa-print text-brand-navy flex-shrink-0"></i>
+          <span class="truncate" data-i18n="printSheetBtn">طباعة لوحة الرموز المعتمدة (A4 Poster)</span>
         </button>
       </div>
     </section>
     <!-- END: QuickActionToolbar -->
 
     <!-- BEGIN: MapPreview -->
-    <section class="px-5 sm:px-8 pt-3 pb-2 no-print" data-purpose="location-map">
-      <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
-        <div class="p-3 bg-white flex items-center justify-between border-b border-slate-100 text-xs">
-          <div class="font-bold text-brand-navy flex items-center gap-1.5">
-            <i class="fa-solid fa-map-pin text-brand-red"></i>
-            <span>ينبع البحر - فندق منازل ينبع</span>
+    <section class="px-3.5 sm:px-8 pt-2 pb-2 no-print" data-purpose="location-map">
+      <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100 w-full">
+        <div class="p-2.5 sm:p-3 bg-white flex items-center justify-between border-b border-slate-100 text-xs">
+          <div class="font-bold text-brand-navy flex items-center gap-1.5 min-w-0 flex-1 me-2">
+            <i class="fa-solid fa-map-pin text-brand-red flex-shrink-0"></i>
+            <span class="truncate">ينبع البحر - فندق منازل ينبع</span>
           </div>
-          <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" class="text-brand-navy font-bold hover:underline flex items-center gap-1">
+          <a href="https://maps.google.com/?q=Yanbu+Manazel+Hotel" target="_blank" rel="noopener noreferrer" class="text-brand-navy font-bold hover:underline flex items-center gap-1 text-[11px] sm:text-xs flex-shrink-0">
             <span data-i18n="mapExpanded">عرض موسع</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px]"></i>
           </a>
         </div>
         <!-- Google Maps Embed -->
-        <div class="w-full h-36 bg-slate-200 relative">
+        <div class="w-full h-32 sm:h-36 bg-slate-200 relative">
           <iframe 
             src="https://maps.google.com/maps?q=Yanbu+Manazel+Hotel&t=&z=14&ie=UTF8&iwloc=&output=embed" 
-            class="w-full h-full border-0" 
+            class="w-full h-full border-0 block" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade" 
             title="موقع شركة أفراح الجزيرة ينبع على الخريطة"
@@ -556,8 +571,8 @@
     <!-- END: PrintSheetGrid -->
 
     <!-- BEGIN: CardGraphicFooterWave -->
-    <div class="relative w-full mt-4 no-print" data-purpose="card-graphic-wave-footer">
-      <svg class="w-full h-24 sm:h-28 block select-none" preserveAspectRatio="none" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+    <div class="relative w-full mt-3 sm:mt-4 overflow-hidden no-print" data-purpose="card-graphic-wave-footer">
+      <svg class="w-full h-20 sm:h-28 block select-none pointer-events-none" preserveAspectRatio="none" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="navyWaveGrad" x1="0%" x2="100%" y1="0%" y2="100%">
             <stop offset="0%" stop-color="#102D46"></stop>
@@ -572,8 +587,8 @@
     <!-- END: CardGraphicFooterWave -->
 
     <!-- BEGIN: Footer -->
-    <footer class="bg-brand-navyDark text-slate-400 py-6 px-6 text-center text-xs border-t border-white/5 no-print" data-purpose="site-footer">
-      <p class="font-medium text-slate-300 mb-1" data-i18n="companyName">
+    <footer class="bg-brand-navyDark text-slate-400 py-5 sm:py-6 px-4 sm:px-6 text-center text-xs border-t border-white/5 no-print" data-purpose="site-footer">
+      <p class="font-medium text-slate-300 mb-1 text-xs sm:text-sm" data-i18n="companyName">
         شركة أفراح الجزيرة لتجارة قطع غيار السيارات
       </p>
       <p class="text-[11px] text-slate-400 font-latin tracking-wider mb-2">
@@ -584,7 +599,7 @@
       </p>
 
       <!-- Bottom Quick Socials / Contacts -->
-      <div class="flex items-center justify-center gap-3.5 text-slate-300">
+      <div id="footerSocialsContainer" class="flex flex-wrap items-center justify-center gap-3 text-slate-300">
         <a href="https://wa.me/966556516712" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-8 h-8 rounded-full bg-white/10 hover:bg-[#25D366] hover:text-white flex items-center justify-center transition-colors">
           <i class="fa-brands fa-whatsapp text-sm"></i>
         </a>
@@ -611,63 +626,63 @@
   <!-- MODAL 1: Three-Type QR Code Download Centre -->
   <!-- ========================================== -->
   <div id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-xs opacity-0 pointer-events-none transition-all duration-300">
-    <div class="modal-card relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col text-center max-h-[92vh] overflow-y-auto">
+    <div class="modal-card relative w-full max-w-sm sm:max-w-md bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col text-center max-h-[90vh] overflow-y-auto">
       
       <!-- Modal Header -->
-      <div class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur-md z-10">
-        <div class="flex items-center gap-2 text-start">
-          <div class="w-8 h-8 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center text-sm">
+      <div class="px-4 sm:px-5 pt-4 pb-3 flex items-center justify-between border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur-md z-10">
+        <div class="flex items-center gap-2 text-start min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center text-sm flex-shrink-0">
             <i class="fa-solid fa-qrcode"></i>
           </div>
-          <div>
-            <h4 class="text-sm font-black text-brand-navy leading-none" id="qrModalTitle" data-i18n="qrHubTitle">مركز رموز الاستجابة السريعة (QR Code)</h4>
+          <div class="min-w-0">
+            <h4 class="text-xs sm:text-sm font-black text-brand-navy leading-none truncate" id="qrModalTitle" data-i18n="qrHubTitle">مركز رموز الاستجابة السريعة (QR Code)</h4>
             <span class="text-[10px] text-slate-400 font-latin">Dynamic High-Res QR Engine</span>
           </div>
         </div>
-        <button onclick="closeQrModal()" aria-label="إغلاق" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-brand-red flex items-center justify-center text-sm transition">
+        <button onclick="closeQrModal()" aria-label="إغلاق" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-brand-red flex items-center justify-center text-xs sm:text-sm transition flex-shrink-0 ms-2">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <!-- Localhost Warning Banner (Phase 4 requirement) -->
-      <div id="localHostWarning" class="hidden mx-4 mt-3 p-3 bg-amber-50 border border-amber-200 rounded-xl text-start text-xs text-amber-800">
+      <!-- Localhost Warning Banner -->
+      <div id="localHostWarning" class="hidden mx-3 sm:mx-4 mt-3 p-2.5 sm:p-3 bg-amber-50 border border-amber-200 rounded-xl text-start text-xs text-amber-800">
         <div class="flex items-start gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5"></i>
-          <span data-i18n="localWarningText">
+          <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 flex-shrink-0"></i>
+          <span class="text-[11px] leading-relaxed" data-i18n="localWarningText">
             تنبيه: أنت تتصفح الموقع من بيئة محلية (Localhost). تأكد من تحديث رابط النطاق في ملف الإعدادات قبل طباعة الرموز للمطبوعات الورقية.
           </span>
         </div>
       </div>
 
-      <!-- 3 Tabs Navigation -->
-      <div class="px-5 pt-3">
-        <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold text-slate-600">
-          <button id="qrTabBtn_website" onclick="switchQrTab('website')" class="py-2 px-1 rounded-lg bg-brand-navy text-white shadow-sm transition">
-            <i class="fa-solid fa-globe block text-xs mb-1"></i>
-            <span data-i18n="qrTabWebsite">رابط الموقع</span>
+      <!-- 3 Tabs Navigation (Equal width, responsive icons and text) -->
+      <div class="px-3 sm:px-5 pt-3">
+        <div class="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-xl text-[11px] sm:text-xs font-bold text-slate-600">
+          <button id="qrTabBtn_website" onclick="switchQrTab('website')" class="py-1.5 sm:py-2 px-1 rounded-lg bg-brand-navy text-white shadow-sm transition truncate">
+            <i class="fa-solid fa-globe block text-xs mb-0.5"></i>
+            <span data-i18n="qrTabWebsite">الموقع</span>
           </button>
-          <button id="qrTabBtn_contact" onclick="switchQrTab('contact')" class="py-2 px-1 rounded-lg hover:bg-slate-200 transition">
-            <i class="fa-solid fa-address-card block text-xs mb-1"></i>
+          <button id="qrTabBtn_contact" onclick="switchQrTab('contact')" class="py-1.5 sm:py-2 px-1 rounded-lg hover:bg-slate-200 transition truncate">
+            <i class="fa-solid fa-address-card block text-xs mb-0.5"></i>
             <span data-i18n="qrTabContact">جهة الاتصال</span>
           </button>
-          <button id="qrTabBtn_whatsapp" onclick="switchQrTab('whatsapp')" class="py-2 px-1 rounded-lg hover:bg-slate-200 transition">
-            <i class="fa-brands fa-whatsapp block text-xs mb-1"></i>
+          <button id="qrTabBtn_whatsapp" onclick="switchQrTab('whatsapp')" class="py-1.5 sm:py-2 px-1 rounded-lg hover:bg-slate-200 transition truncate">
+            <i class="fa-brands fa-whatsapp block text-xs mb-0.5"></i>
             <span data-i18n="qrTabWhatsApp">واتساب</span>
           </button>
         </div>
       </div>
 
       <!-- Modal Body Tab Contents -->
-      <div class="p-5 flex flex-col items-center">
+      <div class="p-3.5 sm:p-5 flex flex-col items-center">
         
         <!-- TAB 1: Website QR -->
         <div id="qrTabContent_website" class="w-full flex flex-col items-center">
           <!-- Campaign UTM Selector -->
-          <div class="w-full mb-3 text-start">
+          <div class="w-full mb-2.5 text-start">
             <label for="qrCampaignSelect" class="block text-[11px] font-bold text-slate-600 mb-1" data-i18n="qrCampaignLabel">
               مصدر الحملة الإعلانية (UTM Tracking):
             </label>
-            <select id="qrCampaignSelect" class="w-full text-xs font-semibold rounded-xl border-slate-200 bg-slate-50 focus:border-brand-navy focus:ring-brand-navy py-1.5">
+            <select id="qrCampaignSelect" class="w-full text-xs font-semibold rounded-xl border-slate-200 bg-slate-50 focus:border-brand-navy focus:ring-brand-navy py-1.5 px-2">
               <option value="business_card">بطاقات العمل الشخصية (Business Cards)</option>
               <option value="shop_poster">ملصقات وواجهة المعرض (Shop Posters)</option>
               <option value="flyer">البروشورات والمنشورات (Flyers)</option>
@@ -676,35 +691,35 @@
           </div>
 
           <!-- Canvas QR View -->
-          <div class="p-3 bg-white rounded-2xl shadow-md border-2 border-slate-200/90 mb-2 qr-canvas-wrapper">
-            <canvas id="qrCanvasWebsite" width="220" height="220" class="block mx-auto"></canvas>
+          <div class="p-2 sm:p-3 bg-white rounded-2xl shadow-md border-2 border-slate-200/90 mb-2 qr-canvas-wrapper w-full max-w-[220px] aspect-square flex items-center justify-center">
+            <canvas id="qrCanvasWebsite" width="220" height="220" class="block mx-auto max-w-full h-auto"></canvas>
             <div id="qrSvgWebsite" class="hidden"></div>
           </div>
 
-          <p id="websiteUrlDisplay" class="text-[11px] text-slate-500 font-latin font-medium break-all mb-3 max-w-xs">
+          <p id="websiteUrlDisplay" class="text-[10px] sm:text-[11px] text-slate-500 font-latin font-medium break-all mb-3 max-w-xs px-2">
             https://afrah-aljazeera.com/
           </p>
 
           <!-- Action Buttons -->
           <div class="w-full space-y-2">
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="downloadQRPNG('website')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-brand-navy hover:bg-brand-navyLight text-white font-bold text-xs shadow-sm transition active:scale-98">
-                <i class="fa-solid fa-file-image text-brand-sky"></i>
-                <span data-i18n="downloadPngBtn">تحميل PNG</span>
+              <button onclick="downloadQRPNG('website')" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-brand-navy hover:bg-brand-navyLight text-white font-bold text-[11px] sm:text-xs shadow-sm transition active:scale-98">
+                <i class="fa-solid fa-file-image text-brand-sky text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="downloadPngBtn">تحميل PNG</span>
               </button>
-              <button onclick="downloadQRSVG('website')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition active:scale-98">
-                <i class="fa-solid fa-bezier-curve text-brand-red"></i>
-                <span data-i18n="downloadSvgBtn">تحميل فيكتور SVG</span>
+              <button onclick="downloadQRSVG('website')" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] sm:text-xs transition active:scale-98">
+                <i class="fa-solid fa-bezier-curve text-brand-red text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="downloadSvgBtn">تحميل SVG</span>
               </button>
             </div>
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="copyToClipboard(getActiveWebsiteUrl(AppState.selectedCampaign))" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition active:scale-98">
-                <i class="fa-solid fa-copy text-brand-navy"></i>
-                <span data-i18n="copyLinkBtn">نسخ الرابط</span>
+              <button onclick="copyToClipboard(getActiveWebsiteUrl(AppState.selectedCampaign))" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] sm:text-xs transition active:scale-98">
+                <i class="fa-solid fa-copy text-brand-navy text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="copyLinkBtn">نسخ الرابط</span>
               </button>
-              <button onclick="shareWebsite()" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition active:scale-98">
-                <i class="fa-solid fa-share-nodes text-brand-sky"></i>
-                <span data-i18n="shareLinkBtn">مشاركة</span>
+              <button onclick="shareWebsite()" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] sm:text-xs transition active:scale-98">
+                <i class="fa-solid fa-share-nodes text-brand-sky text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="shareLinkBtn">مشاركة</span>
               </button>
             </div>
           </div>
@@ -712,28 +727,28 @@
 
         <!-- TAB 2: Contact vCard QR -->
         <div id="qrTabContent_contact" class="w-full hidden flex flex-col items-center">
-          <div class="p-3 bg-white rounded-2xl shadow-md border-2 border-brand-red/30 mb-2 qr-canvas-wrapper">
-            <canvas id="qrCanvasContact" width="220" height="220" class="block mx-auto"></canvas>
+          <div class="p-2 sm:p-3 bg-white rounded-2xl shadow-md border-2 border-brand-red/30 mb-2 qr-canvas-wrapper w-full max-w-[220px] aspect-square flex items-center justify-center">
+            <canvas id="qrCanvasContact" width="220" height="220" class="block mx-auto max-w-full h-auto"></canvas>
             <div id="qrSvgContact" class="hidden"></div>
           </div>
 
-          <p class="text-xs text-slate-500 font-medium mb-3">
+          <p class="text-xs text-slate-500 font-medium mb-3 px-2">
             امسح الرمز بكاميرا هاتفك لحفظ جهة الاتصال مباشرة
           </p>
 
           <div class="w-full space-y-2">
-            <button onclick="downloadVCardFile()" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-brand-red hover:bg-brand-redDark text-white font-bold text-xs shadow-md transition active:scale-98">
-              <i class="fa-solid fa-address-card text-white text-sm"></i>
-              <span data-i18n="downloadVcfBtn">تحميل ملف جهة الاتصال (.vcf)</span>
+            <button onclick="downloadVCardFile()" class="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-brand-red hover:bg-brand-redDark text-white font-bold text-[11px] sm:text-xs shadow-md transition active:scale-98">
+              <i class="fa-solid fa-address-card text-white text-xs sm:text-sm flex-shrink-0"></i>
+              <span class="truncate" data-i18n="downloadVcfBtn">تحميل ملف جهة الاتصال (.vcf)</span>
             </button>
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="downloadQRPNG('contact')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-brand-navy hover:bg-brand-navyLight text-white font-bold text-xs shadow-sm transition active:scale-98">
-                <i class="fa-solid fa-file-image text-brand-sky"></i>
-                <span data-i18n="downloadPngBtn">تحميل PNG</span>
+              <button onclick="downloadQRPNG('contact')" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-brand-navy hover:bg-brand-navyLight text-white font-bold text-[11px] sm:text-xs shadow-sm transition active:scale-98">
+                <i class="fa-solid fa-file-image text-brand-sky text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="downloadPngBtn">تحميل PNG</span>
               </button>
-              <button onclick="downloadQRSVG('contact')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition active:scale-98">
-                <i class="fa-solid fa-bezier-curve text-brand-red"></i>
-                <span data-i18n="downloadSvgBtn">تحميل SVG</span>
+              <button onclick="downloadQRSVG('contact')" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] sm:text-xs transition active:scale-98">
+                <i class="fa-solid fa-bezier-curve text-brand-red text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="downloadSvgBtn">تحميل SVG</span>
               </button>
             </div>
           </div>
@@ -741,28 +756,28 @@
 
         <!-- TAB 3: WhatsApp Direct QR -->
         <div id="qrTabContent_whatsapp" class="w-full hidden flex flex-col items-center">
-          <div class="p-3 bg-white rounded-2xl shadow-md border-2 border-emerald-500/30 mb-2 qr-canvas-wrapper">
-            <canvas id="qrCanvasWhatsApp" width="220" height="220" class="block mx-auto"></canvas>
+          <div class="p-2 sm:p-3 bg-white rounded-2xl shadow-md border-2 border-emerald-500/30 mb-2 qr-canvas-wrapper w-full max-w-[220px] aspect-square flex items-center justify-center">
+            <canvas id="qrCanvasWhatsApp" width="220" height="220" class="block mx-auto max-w-full h-auto"></canvas>
             <div id="qrSvgWhatsApp" class="hidden"></div>
           </div>
 
-          <p class="text-xs text-slate-500 font-medium mb-3">
+          <p class="text-xs text-slate-500 font-medium mb-3 px-2">
             امسح الرمز لفتح محادثة واتساب فورية مع معرض ينبع
           </p>
 
           <div class="w-full space-y-2">
-            <a href="https://wa.me/966556516712" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-xs shadow-md transition active:scale-98">
-              <i class="fa-brands fa-whatsapp text-white text-base"></i>
-              <span data-i18n="openWhatsAppDirectBtn">فتح محادثة واتساب الآن</span>
+            <a href="https://wa.me/966556516712" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-[11px] sm:text-xs shadow-md transition active:scale-98">
+              <i class="fa-brands fa-whatsapp text-white text-sm sm:text-base flex-shrink-0"></i>
+              <span class="truncate" data-i18n="openWhatsAppDirectBtn">فتح محادثة واتساب الآن</span>
             </a>
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="downloadQRPNG('whatsapp')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-brand-navy hover:bg-brand-navyLight text-white font-bold text-xs shadow-sm transition active:scale-98">
-                <i class="fa-solid fa-file-image text-brand-sky"></i>
-                <span data-i18n="downloadPngBtn">تحميل PNG</span>
+              <button onclick="downloadQRPNG('whatsapp')" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-brand-navy hover:bg-brand-navyLight text-white font-bold text-[11px] sm:text-xs shadow-sm transition active:scale-98">
+                <i class="fa-solid fa-file-image text-brand-sky text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="downloadPngBtn">تحميل PNG</span>
               </button>
-              <button onclick="downloadQRSVG('whatsapp')" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition active:scale-98">
-                <i class="fa-solid fa-bezier-curve text-brand-red"></i>
-                <span data-i18n="downloadSvgBtn">تحميل SVG</span>
+              <button onclick="downloadQRSVG('whatsapp')" class="flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] sm:text-xs transition active:scale-98">
+                <i class="fa-solid fa-bezier-curve text-brand-red text-xs flex-shrink-0"></i>
+                <span class="truncate" data-i18n="downloadSvgBtn">تحميل SVG</span>
               </button>
             </div>
           </div>
@@ -776,34 +791,34 @@
   <!-- MODAL 2: WhatsApp Spare Parts Inquiry Form -->
   <!-- ========================================== -->
   <div id="inquiryModal" role="dialog" aria-modal="true" aria-labelledby="inquiryModalTitle" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-xs opacity-0 pointer-events-none transition-all duration-300">
-    <div class="modal-card relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col text-start max-h-[92vh] overflow-y-auto">
+    <div class="modal-card relative w-full max-w-sm sm:max-w-lg bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col text-start max-h-[90vh] overflow-y-auto">
       
       <!-- Modal Header -->
-      <div class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur-md z-10">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center text-sm">
+      <div class="px-4 sm:px-5 pt-4 pb-3 flex items-center justify-between border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur-md z-10">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-brand-red/10 text-brand-red flex items-center justify-center text-sm flex-shrink-0">
             <i class="fa-solid fa-car-burst"></i>
           </div>
-          <div>
-            <h4 class="text-sm font-black text-brand-navy leading-none" id="inquiryModalTitle" data-i18n="inquiryModalTitle">طلب تسعيرة وتوفر قطعة غيار</h4>
-            <span class="text-[10px] text-slate-400" data-i18n="inquiryModalSubtitle">سيتم تحويل البيانات إلى رسالة واتساب منظمة</span>
+          <div class="min-w-0">
+            <h4 class="text-xs sm:text-sm font-black text-brand-navy leading-none truncate" id="inquiryModalTitle" data-i18n="inquiryModalTitle">طلب تسعيرة وتوفر قطعة غيار</h4>
+            <span class="text-[10px] text-slate-400 block truncate mt-0.5" data-i18n="inquiryModalSubtitle">سيتم تحويل البيانات إلى رسالة واتساب منظمة</span>
           </div>
         </div>
-        <button onclick="closeInquiryModal()" aria-label="إغلاق" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-brand-red flex items-center justify-center text-sm transition">
+        <button onclick="closeInquiryModal()" aria-label="إغلاق" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-brand-red flex items-center justify-center text-xs sm:text-sm transition flex-shrink-0 ms-2">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
       <!-- Form Body -->
-      <form id="sparePartsInquiryForm" class="p-5 space-y-3.5">
+      <form id="sparePartsInquiryForm" class="p-3.5 sm:p-5 space-y-3 sm:space-y-3.5">
         <!-- Customer Name -->
         <div>
           <label for="inqName" class="block text-xs font-bold text-slate-700 mb-1" data-i18n="labelCustomerName">اسم العميل (اختياري)</label>
           <input type="text" id="inqName" placeholder="الاسم الكريم" data-i18n-ph="labelCustomerName" class="w-full text-xs rounded-xl border-slate-300 focus:border-brand-navy focus:ring-brand-navy py-2 px-3"/>
         </div>
 
-        <!-- Brand & Model in 2 Columns -->
-        <div class="grid grid-cols-2 gap-2.5">
+        <!-- Brand & Model in Responsive Grid (1 col on small mobile, 2 on larger) -->
+        <div class="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-2.5">
           <div>
             <label for="inqBrand" class="block text-xs font-bold text-slate-700 mb-1">
               <span data-i18n="labelBrand">ماركة السيارة</span> <span class="text-brand-red">*</span>
@@ -826,8 +841,8 @@
           </div>
         </div>
 
-        <!-- Year & Part Number -->
-        <div class="grid grid-cols-2 gap-2.5">
+        <!-- Year & Part Number in Responsive Grid -->
+        <div class="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-2.5">
           <div>
             <label for="inqYear" class="block text-xs font-bold text-slate-700 mb-1">
               <span data-i18n="labelYear">سنة الصنع</span> <span class="text-brand-red">*</span>
@@ -856,8 +871,8 @@
 
         <!-- Submit Button -->
         <button type="submit" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-xs shadow-md shadow-emerald-500/20 transition active:scale-98">
-          <i class="fa-brands fa-whatsapp text-base"></i>
-          <span data-i18n="submitInquiryBtn">إرسال الاستفسار عبر واتساب الآن</span>
+          <i class="fa-brands fa-whatsapp text-sm sm:text-base flex-shrink-0"></i>
+          <span class="truncate" data-i18n="submitInquiryBtn">إرسال الاستفسار عبر واتساب الآن</span>
         </button>
       </form>
     </div>
@@ -867,26 +882,26 @@
   <!-- MODAL 3: Weekly Business Hours Schedule    -->
   <!-- ========================================== -->
   <div id="hoursModal" role="dialog" aria-modal="true" aria-labelledby="hoursModalTitle" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-xs opacity-0 pointer-events-none transition-all duration-300">
-    <div class="modal-card relative w-full max-w-sm bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col text-start">
+    <div class="modal-card relative w-full max-w-xs sm:max-w-sm bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col text-start">
       
       <!-- Modal Header -->
-      <div class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-slate-100">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm">
+      <div class="px-4 sm:px-5 pt-4 pb-3 flex items-center justify-between border-b border-slate-100">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm flex-shrink-0">
             <i class="fa-solid fa-clock"></i>
           </div>
-          <div>
-            <h4 class="text-sm font-black text-brand-navy leading-none" id="hoursModalTitle" data-i18n="workingHoursTitle">ساعات العمل الرسمية</h4>
-            <span class="text-[10px] text-slate-400 font-latin">Asia/Riyadh Standard Time (UTC+3)</span>
+          <div class="min-w-0">
+            <h4 class="text-xs sm:text-sm font-black text-brand-navy leading-none truncate" id="hoursModalTitle" data-i18n="workingHoursTitle">ساعات العمل الرسمية</h4>
+            <span class="text-[10px] text-slate-400 font-latin block truncate mt-0.5">Asia/Riyadh Standard Time (UTC+3)</span>
           </div>
         </div>
-        <button onclick="closeHoursModal()" aria-label="إغلاق" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-brand-red flex items-center justify-center text-sm transition">
+        <button onclick="closeHoursModal()" aria-label="إغلاق" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-brand-red flex items-center justify-center text-xs sm:text-sm transition flex-shrink-0 ms-2">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
       <!-- Schedule Table -->
-      <div class="p-5 text-xs space-y-2">
+      <div class="p-4 sm:p-5 text-xs space-y-2">
         <div class="flex items-center justify-between py-1.5 border-b border-slate-100">
           <span class="font-bold text-slate-700">السبت</span>
           <span class="font-semibold text-slate-600 font-latin">08:00 AM – 10:00 PM</span>
@@ -929,4 +944,3 @@
   <script src="js/app.js"></script>
 </body>
 </html>
-
