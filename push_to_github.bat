@@ -16,7 +16,7 @@ if %ERRORLEVEL% EQU 0 (
     echo ======================================================
 ) else (
     echo.
-    echo If GitHub rejected because of an existing README, trying force push...
+    echo If GitHub rejected because of an existing README or branch conflict, trying force push...
     git push -u origin main --force
 )
 
